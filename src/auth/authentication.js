@@ -4,10 +4,10 @@ const pool = require("../dbConnection");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const insertNewUser = `INSERT INTO users (name, mobile, email, class, gender, password) 
-               VALUES (?, ?, ?, ?, ?, ?)`;
+const insertNewUser =
+  "INSERT INTO users (name, mobile, email, class, gender, password)    VALUES (?, ?, ?, ?, ?, ?)";
 
-const checkMobileNumberSql = `SELECT id FROM users WHERE mobile = ?`;
+const checkMobileNumberSql = "SELECT id FROM users WHERE mobile = ?";
 
 const saltRounds = 10;
 
@@ -24,7 +24,7 @@ router.post("/signUp", (req, res) => {
 
   //check if mobile no. already exist in DB
 
-  pool.query(checkMobileNumberSql, [newUser.mobile], (err, results) => {
+  pool.query(checkMobileNumberSql, [newUser.mobile], async (err, results) => {
     if (err) {
       console.error("Database error:", err.message);
       return res.status(500).send("something went wrong, try again later");
@@ -39,9 +39,7 @@ router.post("/signUp", (req, res) => {
     }
 
     //password hashing
-    const salt = bcrypt.genSaltSync(saltRounds);
-    const hash = bcrypt.hashSync(newUser.password, salt);
-    console.log(hash);
+    const hash = await bcrypt.hash(newUser.password, saltRounds);
 
     const values = [
       newUser.name,
@@ -92,7 +90,7 @@ router.post("/login", (req, res) => {
 
   const { mobile, password } = userCredential;
 
-  pool.query(findUserSql, [mobile], (err, results) => {
+  pool.query(findUserSql, [mobile], async (err, results) => {
     if (err) {
       return res.status(500).send("Something went wrong");
     }
@@ -101,7 +99,7 @@ router.post("/login", (req, res) => {
     }
     const userDetailsfromDB = results[0];
     //compare hash
-    const isMatch = bcrypt.compareSync(password, userDetailsfromDB.password);
+    const isMatch = await bcrypt.compare(password, userDetailsfromDB.password);
     if (!isMatch) {
       return res.status(400).send("Incorrect password");
     }
