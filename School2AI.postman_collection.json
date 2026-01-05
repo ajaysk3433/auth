@@ -1,0 +1,99 @@
+{
+	"info": {
+		"_postman_id": "857545c8-7155-478c-b726-1fade04747c7",
+		"name": "School2AI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50117072",
+		"_collection_link": "https://ajaysk3433-2496493.postman.co/workspace/Ajay-Singh's-Workspace~4538c3cd-ba52-454c-8e5a-941bd2521674/collection/50117072-857545c8-7155-478c-b726-1fade04747c7?action=share&source=collection_link&creator=50117072"
+	},
+	"item": [
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"name\": \"Ajay Singh\",\n  \"mobile\": \"9818793233\",\n  \"email\": \"ajaysk3433@gmail.com\",\n  \"class\": \"10\",\n  \"gender\": \"Male\",\n  \"password\": \"myStrongPassword123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"mobile\": \"9818793233\",\n  \"password\": \"myStrongPassword123\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\n{\n  \"mobile\": \"9818793233\",\n  \"otp\" : \"123456\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/auth/login/otp",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"auth",
+						"login",
+						"otp"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
