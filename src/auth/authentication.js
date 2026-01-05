@@ -60,7 +60,10 @@ router.post("/signUp", (req, res) => {
       }
       console.log("User inserted successfully, ID:", results.insertId);
       //generating token
-      const token = jwt.sign({ mobile: newUser.mobile }, "secret key");
+      const token = jwt.sign(
+        { mobile: newUser.mobile },
+        process.env.JWT_SECRET || "secret key"
+      );
       //storing token in cookie
       res.cookie("token", token, {
         httpOnly: true,
@@ -103,7 +106,10 @@ router.post("/login", (req, res) => {
       return res.status(400).send("Incorrect password");
     }
     //generate token and store in cookie
-    const token = jwt.sign({ mobile: userDetailsfromDB.mobile }, "secret key");
+    const token = jwt.sign(
+      { mobile: userDetailsfromDB.mobile },
+      process.env.JWT_SECRET || "secret key"
+    );
     res.cookie("token", token, {
       httpOnly: true,
       maxAge: 60 * 60 * 1000,
@@ -139,7 +145,10 @@ router.post("/login/otp", (req, res) => {
       return res.status(400).send("Incorrect OTP");
     }
     //generate token and store in cookie
-    const token = jwt.sign({ mobile: userDetailsfromDB.mobile }, "secret key");
+    const token = jwt.sign(
+      { mobile: userDetailsfromDB.mobile },
+      process.env.JWT_SECRET || "secret key"
+    );
     res.cookie("token", token, {
       httpOnly: true,
       maxAge: 60 * 60 * 1000,
